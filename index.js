@@ -1,7 +1,6 @@
 import express from 'express';
 import fetch from 'node-fetch';
 import path from 'path';
-//ala
 const app = express();
 const PORT = process.env.PORT || 3000;
 
@@ -12,7 +11,7 @@ app.get('/search', async (req, res) => {
     const query = req.query.q;
 
     if (!query) {
-        return res.status(400).json({ error: 'Query parameter "q" is required.' });
+        return res.status(400).json({ error: 'Query parameter "q" is required' });
     }
 
     const apiUrl = `https://hiroshi-rest-api.replit.app/search/spotify?search=${encodeURIComponent(query)}`;
