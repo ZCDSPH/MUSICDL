@@ -14,7 +14,7 @@ app.get('/search', async (req, res) => {
         return res.status(400).json({ error: 'Query parameter "q" is required' });
     }
 
-    const apiUrl = `https://hiroshi-rest-api.replit.app/search/spotify?search=${encodeURIComponent(query)}`;
+    const apiUrl = `https://hiroshi-api.onrender.com/search/spotify?search=${encodeURIComponent(query)}`;
 
     try {
         const response = await fetch(apiUrl);
