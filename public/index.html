@@ -3,15 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>𝐒𝐎𝐍𝐆 𝐃𝐎𝐖𝐍𝐋𝐎𝐀𝐃𝐄𝐑 𝐅0𝐑 𝐅𝐑𝐄𝐄 𝐁𝐘 𝐙𝐂𝐃𝐒 𝐏𝐇</title>
-    <link rel="icon" type="image/jpg" href="https://i.ibb.co/64G14k3/sptfy.jpg">
+    <title>𝐌𝐔𝐒𝐈𝐂 𝐃𝐎𝐖𝐍𝐋𝐎𝐀𝐃𝐄𝐑</title>
+    <link rel="icon" type="image/png" href="https://i.ibb.co/64G14k3/sptfy.jpg">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         body {
             font-family: 'Montserrat', sans-serif;
-            background-color: #181818;
-            color: #e0e0e0;
+            background: linear-gradient(135deg, #00bcd4, #ff4081);
+            color: #ffffff;
             padding: 20px;
             margin: 0;
             min-height: 100vh;
@@ -24,12 +24,14 @@
             text-align: center;
             margin-bottom: 30px;
             font-size: 2.5rem;
-            color: #9b59b6;
+            text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+            color: #ff4081;
         }
         #searchContainer {
             display: flex;
             justify-content: center;
             margin-bottom: 30px;
+            width: 100%;
         }
         #searchInput {
             padding: 15px;
@@ -39,25 +41,26 @@
             border-radius: 25px 0 0 25px;
             font-size: 18px;
             outline: none;
-            background: #333;
-            color: #fff;
+            background: rgba(255, 255, 255, 0.2);
+            color: #ffffff;
+            backdrop-filter: blur(10px);
             transition: box-shadow 0.3s;
         }
         #searchInput:focus {
-            box-shadow: 0 0 10px rgba(155, 89, 182, 0.5);
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.7);
         }
         #searchButton {
             padding: 15px 25px;
             border: none;
             border-radius: 0 25px 25px 0;
-            background-color: #9b59b6;
-            color: #fff;
+            background-color: #ff4081;
+            color: #00bcd4;
             cursor: pointer;
             font-size: 18px;
             transition: background-color 0.3s, transform 0.3s;
         }
         #searchButton:hover {
-            background-color: #8e44ad;
+            background-color: #e6007e;
             transform: translateY(-2px);
         }
         #results {
@@ -65,14 +68,17 @@
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
             gap: 20px;
             margin-top: 20px;
+            width: 100%;
         }
         .songDiv {
             border: 1px solid rgba(255, 255, 255, 0.2);
             padding: 20px;
             border-radius: 10px;
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
             text-align: center;
             transition: transform 0.2s, box-shadow 0.2s;
+            color: #ffffff;
         }
         .songDiv:hover {
             transform: scale(1.05);
@@ -95,13 +101,13 @@
             transition: background-color 0.3s, transform 0.3s;
             font-size: 14px;
             cursor: pointer;
-            background-color: #9b59b6;
-            color: #fff;
+            background-color: #ff4081;
+            color: #00bcd4;
             flex: 1;
             margin: 5px;
         }
         .button-group a:hover, .button-group button:hover {
-            background-color: #8e44ad;
+            background-color: #e6007e;
             transform: translateY(-1px);
         }
         #audioPlayer {
@@ -129,7 +135,7 @@
             color: #ccc;
         }
         .owner-link {
-            color: #9b59b6;
+            color: #00bcd4;
             font-weight: bold;
             text-decoration: none;
         }
@@ -147,7 +153,7 @@
     <div id="results"></div>
     <audio id="audioPlayer" controls>
         <source id="audioSource" src="" type="audio/mpeg">
-        Your browser does not support the audio elemenT.
+        Your browser does not support the audio element.
     </audio>
     <div id="errorMessage">Music cannot be found. Please try again.</div>
     <footer>
