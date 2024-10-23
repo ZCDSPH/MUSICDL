@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>𝐒𝐎𝐍𝐆 𝐃𝐎𝐖𝐍𝐋𝐎𝐀𝐃𝐄𝐑 𝐅𝐎𝐑 𝐅𝐑𝐄𝐄 𝐁𝐘 𝐙𝐂𝐃𝐒 𝐏𝐇</title>
+    <title>𝐒𝐎𝐍𝐆 𝐃𝐎𝐖𝐍𝐋𝐎𝐀𝐃𝐄𝐑 𝐅𝐎𝐑 𝐅𝐑𝐄𝐄</title>
     <link rel="icon" type="image/jpg" href="https://i.ibb.co/64G14k3/sptfy.jpg">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -20,21 +20,18 @@
             align-items: center;
             overflow-y: auto;
         }
-
         h1 {
             text-align: center;
             margin-bottom: 30px;
             font-size: 2.5rem;
             color: #1db954;
         }
-
         #searchContainer {
             display: flex;
             justify-content: center;
             margin-bottom: 30px;
             width: 100%;
         }
-
         #searchInput {
             padding: 15px;
             width: 100%;
@@ -47,11 +44,9 @@
             color: #fff;
             transition: background 0.3s;
         }
-
         #searchInput:focus {
             background: #444;
         }
-
         #searchButton {
             padding: 15px 25px;
             border: none;
@@ -63,23 +58,10 @@
             transition: transform 0.2s;
             outline: none;
             user-select: none;
-            -webkit-tap-highlight-color: transparent;
         }
-
-        #searchButton:focus,
-        #searchButton:active {
-            outline: none;
-            background-color: #1db954;
-            box-shadow: none;
-            transform: scale(0.95);
-            box-shadow: none;
-            outline: none;
-        }
-
         #searchButton:hover {
             background-color: #1ed760;
         }
-
         #results {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -87,41 +69,34 @@
             margin-top: 20px;
             width: 100%;
         }
-
         .songDiv {
             border-radius: 10px;
             background: rgba(255, 255, 255, 0.05);
             text-align: center;
             padding: 20px;
             position: relative;
-            overflow: hidden;
             transition: transform 0.2s;
         }
-
         .songDiv:hover {
             transform: scale(1.02);
         }
-
         .song-image {
             width: 100%;
             height: auto;
             border-radius: 10px;
             margin-bottom: 10px;
         }
-
         .songTitle {
             font-size: 1.4rem;
             margin: 10px 0;
             color: #1db954;
         }
-
         .button-group {
             display: flex;
             justify-content: space-between;
             margin-top: 10px;
             width: 100%;
         }
-
         .button-group a,
         .button-group button {
             flex: 1;
@@ -135,12 +110,10 @@
             text-decoration: none;
             transition: background-color 0.3s;
         }
-
         .button-group a:hover,
         .button-group button:hover {
             background-color: #1ed760;
         }
-
         #audioPlayer {
             margin-top: 20px;
             width: 100%;
@@ -150,7 +123,6 @@
             padding: 10px;
             display: none;
         }
-
         #errorMessage {
             display: none;
             margin-top: 20px;
@@ -161,19 +133,16 @@
             opacity: 0;
             transition: opacity 0.5s ease-in-out;
         }
-
         footer {
             text-align: center;
             margin-top: 30px;
             color: #ccc;
         }
-
         .owner-link {
             color: #1db954;
             font-weight: bold;
             text-decoration: none;
         }
-
         .owner-link:hover {
             text-decoration: underline;
         }
@@ -199,6 +168,10 @@
     <script>
         document.getElementById('searchButton').addEventListener('click', async () => {
             const query = document.getElementById('searchInput').value;
+            if (!query) {
+                displayErrorMessage('Please enter a search term.');
+                return;
+            }
             const response = await fetch(`/search?q=${encodeURIComponent(query)}`);
             if (response.ok) {
                 const data = await response.json();
@@ -241,7 +214,6 @@
                 downloadButton.textContent = '𝙳𝙾𝚆𝙽𝙻𝙾𝙰𝙳 𝙼𝚄𝚂𝙸𝙲';
 
                 const playButton = document.createElement('button');
-const playButton = document.createElement('button');
                 playButton.textContent = '𝙿𝙻𝙰𝚈 𝙼𝚄𝚂𝙸𝙲';
                 playButton.onclick = () => playAudio(song.download);
 
@@ -274,6 +246,7 @@ const playButton = document.createElement('button');
             }, 0);
             setTimeout(() => {
                 errorMessage.style.opacity = 0;
+                errorMessage.style.display = 'none';
             }, 3000);
         }
     </script>
