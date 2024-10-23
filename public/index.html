@@ -19,7 +19,6 @@
             flex-direction: column;
             align-items: center;
             justify-content: center; /* Center vertically */
-            overflow-y: auto;
         }
         h1 {
             text-align: center;
@@ -64,13 +63,13 @@
             background-color: #1ed760;
         }
         #results {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 20px;
+            display: flex;
+            flex-wrap: wrap; /* Allows items to wrap */
+            justify-content: center; /* Center items */
+            gap: 20px; /* Space between items */
             margin-top: 20px;
             width: 100%;
             max-width: 1200px; /* Max width for better centering */
-            justify-content: center; /* Center the grid items */
         }
         .songDiv {
             border-radius: 10px;
@@ -79,6 +78,8 @@
             padding: 20px;
             position: relative;
             transition: transform 0.2s;
+            flex: 1 1 300px; /* Flexible basis of 300px */
+            max-width: 300px; /* Max width of each card */
         }
         .songDiv:hover {
             transform: scale(1.02);
@@ -148,6 +149,19 @@
         }
         .owner-link:hover {
             text-decoration: underline;
+        }
+
+        /* Media Queries for responsiveness */
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 2rem; /* Smaller heading on mobile */
+            }
+            #searchInput {
+                max-width: 100%; /* Full width on small screens */
+            }
+            #searchButton {
+                width: 100%; /* Full width button */
+            }
         }
     </style>
 </head>
