@@ -93,23 +93,24 @@
         }
         .button-group {
             display: flex;
-            justify-content: space-between;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
             margin-top: 10px;
             width: 100%;
         }
         .button-group a,
         .button-group button {
-            flex: 1;
+            width: 100%;
             padding: 10px;
             border-radius: 5px;
             text-align: center;
             background-color: #1db954;
             color: #fff;
-            margin: 0 5px;
+            margin: 5px 0;
             cursor: pointer;
             text-decoration: none;
             transition: background-color 0.3s;
-            min-width: 100px;
         }
         .button-group a:hover,
         .button-group button:hover {
