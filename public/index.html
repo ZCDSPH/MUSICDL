@@ -80,10 +80,6 @@
             background-color: #1ed760;
         }
 
-        #searchButton::-moz-focus-inner {
-            border: 0;
-        }
-
         #results {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -201,22 +197,18 @@
     </footer>
 
     <script>
-        document.getElementById('searchButton').addEventListener('click', () => {
+        document.getElementById('searchButton').addEventListener('click', async () => {
             const query = document.getElementById('searchInput').value;
-            if (query.trim() !== '') {
-                fetch(`/search?q=${encodeURIComponent(query)}`)
-                    .then(response => response.json())
-                    .then(data => {
-                        if (data.length > 0) {
-                            displayResults(data);
-                        } else {
-                            displayErrorMessage('𝙼𝚄𝚂𝙸𝙲 𝙽𝙾𝚃 𝙵𝙾𝚄𝙽𝙳 [ 𝚃𝚁𝚈 𝙰𝙶𝙰𝙸𝙽 ]');
-                        }
-                    })
-                    .catch(error => {
-                        console.error('Error:', error);
-                        displayErrorMessage('𝙴𝚁𝚁𝙾𝚁 𝙵𝙴𝚃𝙲𝙷𝙸𝙽𝙶 𝙳𝙰𝚃𝙰');
-                    });
+            const response = await fetch(`/search?q=${encodeURIComponent(query)}`);
+            if (response.ok) {
+                const data = await response.json();
+                if (data.length > 0) {
+                    displayResults(data);
+                } else {
+                    displayErrorMessage('𝙼𝚄𝚂𝙸𝙲 𝙽𝙾𝚃 𝙵𝙾𝚄𝙽𝙳 [ 𝚃𝚁𝚈 𝙰𝙶𝙰𝙸𝙽 ]');
+                }
+            } else {
+                displayErrorMessage('𝙼𝚄𝚂𝙸𝙲 𝙽𝙾𝚃 𝙵𝙾𝚄𝙽𝙳 [ 𝚃𝚁𝚈 𝙰𝙶𝙰𝙸𝙽 ]');
             }
         });
 
@@ -246,18 +238,31 @@
 
                 const downloadButton = document.createElement('a');
                 downloadButton.href = song.download;
-                downloadButton.textContent= '𝙳𝙾𝚆𝙽𝙻𝙾𝙰𝙳';
-                downloadButton.target = '_blank';
+                downloadButton.textContent = '𝙳𝙾𝚆𝙽𝙻𝙾𝙰𝙳 𝙼𝚄𝚂𝙸𝙲';
+
+                const playButton = document.createElement('button');
+const playButton = document.createElement('button');
+                playButton.textContent = '𝙿𝙻𝙰𝚈 𝙼𝚄𝚂𝙸𝙲';
+                playButton.onclick = () => playAudio(song.download);
 
                 buttonGroup.appendChild(trackLink);
                 buttonGroup.appendChild(downloadButton);
+                buttonGroup.appendChild(playButton);
 
                 songDiv.appendChild(songImage);
                 songDiv.appendChild(songTitle);
                 songDiv.appendChild(buttonGroup);
-
                 resultsDiv.appendChild(songDiv);
             });
+        }
+
+        function playAudio(url) {
+            const audioPlayer = document.getElementById('audioPlayer');
+            const audioSource = document.getElementById('audioSource');
+            audioSource.src = url;
+            audioPlayer.load();
+            audioPlayer.style.display = 'block';
+            audioPlayer.play();
         }
 
         function displayErrorMessage(message) {
@@ -266,7 +271,10 @@
             errorMessage.style.display = 'block';
             setTimeout(() => {
                 errorMessage.style.opacity = 1;
-            }, 100);
+            }, 0);
+            setTimeout(() => {
+                errorMessage.style.opacity = 0;
+            }, 3000);
         }
     </script>
 </body>
