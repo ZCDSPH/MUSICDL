@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>𝐒𝐎𝐍𝐆 𝐃𝐎𝐖𝐍𝐋𝐎𝐀𝐃𝐄𝐑 𝐅0𝐑 𝐅𝐑𝐄𝐄 𝐁𝐘 𝐙𝐂𝐃𝐒 𝐏𝐇</title>
+    <title>𝐒𝐎𝐍𝐆 𝐃𝐎𝐖𝐍𝐋𝐎𝐀𝐃𝐄𝐑 𝐅𝐎𝐑 𝐅𝐑𝐄𝐄 𝐁𝐘 𝐙𝐂𝐃𝐒 𝐏𝐇</title>
     <link rel="icon" type="image/jpg" href="https://i.ibb.co/64G14k3/sptfy.jpg">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -79,7 +79,7 @@
         #searchButton:hover {
             background-color: #1ed760;
         }
-        
+
         #searchButton::-moz-focus-inner {
             border: 0;
         }
@@ -201,18 +201,22 @@
     </footer>
 
     <script>
-        document.getElementById('searchButton').addEventListener('click', async () => {
+        document.getElementById('searchButton').addEventListener('click', () => {
             const query = document.getElementById('searchInput').value;
-            const response = await fetch(`https://musicdownloaderzcdsph.onrender.com/search?q=${encodeURIComponent(query)}`);
-            if (response.ok) {
-                const data = await response.json();
-                if (data.length > 0) {
-                    displayResults(data);
-                } else {
-                    displayErrorMessage('𝙼𝚄𝚂𝙸𝙲 𝙽𝙾𝚃 𝙵𝙾𝚄𝙽𝙳 [ 𝚃𝚁𝚈 𝙰𝙶𝙰𝙸𝙽 ]');
-                }
-            } else {
-                displayErrorMessage('𝙼𝚄𝚂𝙸𝙲 𝙽𝙾𝚃 𝙵𝙾𝚄𝙽𝙳 [ 𝚃𝚁𝚈 𝙰𝙶𝙰𝙸𝙽 ]');
+            if (query.trim() !== '') {
+                fetch(`/search?q=${encodeURIComponent(query)}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.length > 0) {
+                            displayResults(data);
+                        } else {
+                            displayErrorMessage('𝙼𝚄𝚂𝙸𝙲 𝙽𝙾𝚃 𝙵𝙾𝚄𝙽𝙳 [ 𝚃𝚁𝚈 𝙰𝙶𝙰𝙸𝙽 ]');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        displayErrorMessage('𝙴𝚁𝚁𝙾𝚁 𝙵𝙴𝚃𝙲𝙷𝙸𝙽𝙶 𝙳𝙰𝚃𝙰');
+                    });
             }
         });
 
@@ -242,30 +246,18 @@
 
                 const downloadButton = document.createElement('a');
                 downloadButton.href = song.download;
-                downloadButton.textContent = '𝙳𝙾𝚆𝙽𝙻𝙾𝙰𝙳 𝙼𝚄𝚂𝙸𝙲';
-
-                const playButton = document.createElement('button');
-                playButton.textContent = '𝙿𝙻𝙰𝚈 𝙼𝚄𝚂𝙸𝙲';
-                playButton.onclick = () => playAudio(song.download);
+                downloadButton.textContent= '𝙳𝙾𝚆𝙽𝙻𝙾𝙰𝙳';
+                downloadButton.target = '_blank';
 
                 buttonGroup.appendChild(trackLink);
                 buttonGroup.appendChild(downloadButton);
-                buttonGroup.appendChild(playButton);
 
                 songDiv.appendChild(songImage);
                 songDiv.appendChild(songTitle);
                 songDiv.appendChild(buttonGroup);
+
                 resultsDiv.appendChild(songDiv);
             });
-        }
-
-        function playAudio(url) {
-            const audioPlayer = document.getElementById('audioPlayer');
-            const audioSource = document.getElementById('audioSource');
-            audioSource.src = url;
-            audioPlayer.load();
-            audioPlayer.style.display = 'block';
-            audioPlayer.play();
         }
 
         function displayErrorMessage(message) {
@@ -274,10 +266,7 @@
             errorMessage.style.display = 'block';
             setTimeout(() => {
                 errorMessage.style.opacity = 1;
-            }, 0);
-            setTimeout(() => {
-                errorMessage.style.opacity = 0;
-            }, 3000);
+            }, 100);
         }
     </script>
 </body>
